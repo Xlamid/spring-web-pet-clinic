@@ -107,7 +107,7 @@ public class PetControllerTest {
 
     @Test
     void shouldNotDeletePetWhenPetNotFound() throws Exception {
-        mockMvc.perform(delete("/api/pets/{id}", 1))
+        mockMvc.perform(delete("/api/pets/{id}", 10))
                 .andExpect(status().isNotFound());
     }
 

@@ -20,6 +20,14 @@ public class PostPetDto {
         this.userId = userId;
     }
 
+    @Override
+    public String toString() {
+        return "PostPetDto{" +
+                "name='" + name + '\'' +
+                ", userId=" + userId +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

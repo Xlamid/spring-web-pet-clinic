@@ -1,6 +1,8 @@
 package git.xlamid.springwebpetclinic.handler;
 
 import git.xlamid.springwebpetclinic.dto.ErrorMessageResponseDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,8 +16,11 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessageResponseDto> exceptionNotValidHandler(MethodArgumentNotValidException e) {
+        log.error("Validation error:", e);
         String detailedMessage = e.getBindingResult()
                 .getFieldErrors().stream()
                 .map(error ->
@@ -33,6 +38,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<ErrorMessageResponseDto> exceptionIllegalStateHandler(IllegalStateException e) {
+        log.error("Conflict states error:", e);
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .body(new ErrorMessageResponseDto(
@@ -44,6 +50,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ErrorMessageResponseDto> exceptionNotFoundHandler(NoSuchElementException e) {
+        log.error("Not found error:", e);
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorMessageResponseDto(
@@ -55,6 +62,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessageResponseDto> exceptionHandler(Exception e) {
+        log.error("Internal server error:", e);
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorMessageResponseDto(

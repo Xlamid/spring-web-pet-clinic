@@ -21,6 +21,15 @@ public class PostUserDto {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "PostUserDto{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

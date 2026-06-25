@@ -16,6 +16,13 @@ public class PutPetDto {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "PutPetDto{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

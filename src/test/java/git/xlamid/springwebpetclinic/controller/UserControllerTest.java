@@ -157,7 +157,7 @@ class UserControllerTest {
 
     @Test
     void shouldNotGetUserWhenUserNotFound() throws Exception {
-        mockMvc.perform(get("/api/users/{id}", 1))
+        mockMvc.perform(get("/api/users/{id}", 10))
                 .andExpect(status().isNotFound())
                 .andReturn().getResponse()
                 .getContentAsString();

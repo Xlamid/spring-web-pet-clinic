@@ -21,6 +21,15 @@ public class PutUserDto {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "PutUserDto{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

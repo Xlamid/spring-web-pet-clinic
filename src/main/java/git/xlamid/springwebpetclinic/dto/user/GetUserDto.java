@@ -25,6 +25,17 @@ public class GetUserDto {
         this.pets = pets;
     }
 
+    @Override
+    public String toString() {
+        return "GetUserDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", pets=" + pets +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
