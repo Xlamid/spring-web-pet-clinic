@@ -1,8 +1,8 @@
 package git.xlamid.springwebpetclinic.mapper;
 
 import git.xlamid.springwebpetclinic.dto.user.GetUserDto;
-import git.xlamid.springwebpetclinic.dto.user.PostUserDto;
-import git.xlamid.springwebpetclinic.dto.user.PutUserDto;
+import git.xlamid.springwebpetclinic.dto.user.CreateUserDto;
+import git.xlamid.springwebpetclinic.dto.user.UpdateUserDto;
 import git.xlamid.springwebpetclinic.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.HtmlUtils;
@@ -20,7 +20,7 @@ public class UserMapper {
         );
     }
 
-    public User postUserDtoToUser(PostUserDto dto) {
+    public User postUserDtoToUser(CreateUserDto dto) {
         User model = new User();
         model.setName(dto.getName());
         model.setEmail(dto.getEmail());
@@ -28,7 +28,7 @@ public class UserMapper {
         return model;
     }
 
-    public User putUserDtoToUser(PutUserDto dto) {
+    public User putUserDtoToUser(UpdateUserDto dto) {
         User model = new User();
         model.setName(dto.getName());
         model.setEmail(dto.getEmail());

@@ -1,8 +1,8 @@
 package git.xlamid.springwebpetclinic.helper;
 
-import git.xlamid.springwebpetclinic.dto.pet.PostPetDto;
-import git.xlamid.springwebpetclinic.dto.pet.PutPetDto;
-import git.xlamid.springwebpetclinic.dto.user.PostUserDto;
+import git.xlamid.springwebpetclinic.dto.pet.CreatePetDto;
+import git.xlamid.springwebpetclinic.dto.pet.UpdatePetDto;
+import git.xlamid.springwebpetclinic.dto.user.CreateUserDto;
 import git.xlamid.springwebpetclinic.mapper.PetMapper;
 import git.xlamid.springwebpetclinic.mapper.UserMapper;
 import git.xlamid.springwebpetclinic.model.Pet;
@@ -30,45 +30,45 @@ public class CreatePetHelper {
         this.petMapper = petMapper;
     }
 
-    public PostPetDto createCorrectPostPetDto(Long userId) {
-        return new PostPetDto(
+    public CreatePetDto createCorrectPostPetDto(Long userId) {
+        return new CreatePetDto(
                 "name1",
                 userId
         );
     }
 
-    public PostPetDto createCorrectPostPetDto() {
-        PostUserDto postUserDto = createUserHelper.createCorrectPostUserDto();
-        User user = userService.createUser(userMapper.postUserDtoToUser(postUserDto));
-        return new PostPetDto(
+    public CreatePetDto createCorrectPostPetDto() {
+        CreateUserDto createUserDto = createUserHelper.createCorrectPostUserDto();
+        User user = userService.createUser(userMapper.postUserDtoToUser(createUserDto));
+        return new CreatePetDto(
                 "name1",
                 user.getId()
         );
     }
 
-    public PostPetDto createIncorrectPostPetDto() {
-        PostUserDto postUserDto = createUserHelper.createCorrectPostUserDto();
-        userService.createUser(userMapper.postUserDtoToUser(postUserDto));
-        return new PostPetDto(
+    public CreatePetDto createIncorrectPostPetDto() {
+        CreateUserDto createUserDto = createUserHelper.createCorrectPostUserDto();
+        userService.createUser(userMapper.postUserDtoToUser(createUserDto));
+        return new CreatePetDto(
                 "n",
                 20L
         );
     }
 
     public Pet createCorrectPet() {
-        PostPetDto postPetDto = createCorrectPostPetDto();
-        return petService.createPet(petMapper.postPetDtoToPet(postPetDto));
+        CreatePetDto createPetDto = createCorrectPostPetDto();
+        return petService.createPet(petMapper.postPetDtoToPet(createPetDto));
 
     }
 
-    public PutPetDto createCorrectPutPetDto() {
-        return new PutPetDto(
+    public UpdatePetDto createCorrectPutPetDto() {
+        return new UpdatePetDto(
                 "name2"
         );
     }
 
-    public PutPetDto createIncorrectPutPetDto() {
-        return new PutPetDto(
+    public UpdatePetDto createIncorrectPutPetDto() {
+        return new UpdatePetDto(
                 "n"
         );
     }

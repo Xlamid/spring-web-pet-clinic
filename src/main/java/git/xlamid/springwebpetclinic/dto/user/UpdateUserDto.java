@@ -2,7 +2,7 @@ package git.xlamid.springwebpetclinic.dto.user;
 
 import jakarta.validation.constraints.*;
 
-public class PutUserDto {
+public class UpdateUserDto {
 
     @NotBlank
     @Size(min = 1, max = 100)
@@ -12,10 +12,10 @@ public class PutUserDto {
     @NotNull
     private Integer age;
 
-    public PutUserDto() {
+    public UpdateUserDto() {
     }
 
-    public PutUserDto(String name, String email, Integer age) {
+    public UpdateUserDto(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
         this.age = age;

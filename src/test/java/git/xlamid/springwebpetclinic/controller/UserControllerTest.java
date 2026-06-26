@@ -1,9 +1,9 @@
 package git.xlamid.springwebpetclinic.controller;
 
-import git.xlamid.springwebpetclinic.dto.pet.PostPetDto;
+import git.xlamid.springwebpetclinic.dto.pet.CreatePetDto;
 import git.xlamid.springwebpetclinic.dto.user.GetUserDto;
-import git.xlamid.springwebpetclinic.dto.user.PostUserDto;
-import git.xlamid.springwebpetclinic.dto.user.PutUserDto;
+import git.xlamid.springwebpetclinic.dto.user.CreateUserDto;
+import git.xlamid.springwebpetclinic.dto.user.UpdateUserDto;
 import git.xlamid.springwebpetclinic.helper.CreatePetHelper;
 import git.xlamid.springwebpetclinic.helper.CreateUserHelper;
 import git.xlamid.springwebpetclinic.mapper.PetMapper;
@@ -57,7 +57,7 @@ class UserControllerTest {
 
     @Test
     void shouldSuccessCreateUser() throws Exception {
-        PostUserDto postDto = createUserHelper.createCorrectPostUserDto();
+        CreateUserDto postDto = createUserHelper.createCorrectPostUserDto();
         String json = objectMapper.writeValueAsString(postDto);
 
         String resJson = mockMvc.perform(post("/api/users")
@@ -76,7 +76,7 @@ class UserControllerTest {
 
     @Test
     void shouldNotCreateUserWhenUserIncorrect() throws Exception {
-        PostUserDto postDto = createUserHelper.createIncorrectPostUserDto();
+        CreateUserDto postDto = createUserHelper.createIncorrectPostUserDto();
         String json = objectMapper.writeValueAsString(postDto);
 
         mockMvc.perform(post("/api/users")
@@ -87,9 +87,9 @@ class UserControllerTest {
 
     @Test
     void shouldSuccessUpdateUser() throws Exception {
-        PostUserDto postDto = createUserHelper.createCorrectPostUserDto();
+        CreateUserDto postDto = createUserHelper.createCorrectPostUserDto();
         User user = userService.createUser(userMapper.postUserDtoToUser(postDto));
-        PutUserDto putDto = createUserHelper.createCorrectPutUserDto();
+        UpdateUserDto putDto = createUserHelper.createCorrectPutUserDto();
         String json = objectMapper.writeValueAsString(putDto);
 
         String resJson = mockMvc.perform(put("/api/users/{id}", user.getId())
@@ -108,9 +108,9 @@ class UserControllerTest {
 
     @Test
     void shouldNotUpdateUserWhenUserIncorrect() throws Exception {
-        PostUserDto postDto = createUserHelper.createCorrectPostUserDto();
+        CreateUserDto postDto = createUserHelper.createCorrectPostUserDto();
         User user = userService.createUser(userMapper.postUserDtoToUser(postDto));
-        PutUserDto putDto = createUserHelper.createIncorrectPutUserDto();
+        UpdateUserDto putDto = createUserHelper.createIncorrectPutUserDto();
         String json = objectMapper.writeValueAsString(putDto);
 
         mockMvc.perform(put("/api/users/{id}", user.getId())
@@ -121,7 +121,7 @@ class UserControllerTest {
 
     @Test
     void shouldSuccessDeleteUser() throws Exception {
-        PostUserDto postDto = createUserHelper.createCorrectPostUserDto();
+        CreateUserDto postDto = createUserHelper.createCorrectPostUserDto();
         User user = userService.createUser(userMapper.postUserDtoToUser(postDto));
 
         mockMvc.perform(delete("/api/users/{id}", user.getId()))
@@ -130,10 +130,10 @@ class UserControllerTest {
 
     @Test
     void shouldNotDeleteUserWhenHasPets() throws Exception {
-        PostUserDto postDto = createUserHelper.createCorrectPostUserDto();
+        CreateUserDto postDto = createUserHelper.createCorrectPostUserDto();
         User user = userService.createUser(userMapper.postUserDtoToUser(postDto));
-        PostPetDto postPetDto = createPetHelper.createCorrectPostPetDto(user.getId());
-        petService.createPet(petMapper.postPetDtoToPet(postPetDto));
+        CreatePetDto createPetDto = createPetHelper.createCorrectPostPetDto(user.getId());
+        petService.createPet(petMapper.postPetDtoToPet(createPetDto));
 
         mockMvc.perform(delete("/api/users/{id}", user.getId()))
                 .andExpect(status().isConflict());
@@ -141,7 +141,7 @@ class UserControllerTest {
 
     @Test
     void shouldSuccessGetUser() throws Exception {
-        PostUserDto postDto = createUserHelper.createCorrectPostUserDto();
+        CreateUserDto postDto = createUserHelper.createCorrectPostUserDto();
         User user = userService.createUser(userMapper.postUserDtoToUser(postDto));
 
         String resJson = mockMvc.perform(get("/api/users/{id}", user.getId()))

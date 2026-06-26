@@ -1,8 +1,8 @@
 package git.xlamid.springwebpetclinic.controller;
 
 import git.xlamid.springwebpetclinic.dto.user.GetUserDto;
-import git.xlamid.springwebpetclinic.dto.user.PostUserDto;
-import git.xlamid.springwebpetclinic.dto.user.PutUserDto;
+import git.xlamid.springwebpetclinic.dto.user.CreateUserDto;
+import git.xlamid.springwebpetclinic.dto.user.UpdateUserDto;
 import git.xlamid.springwebpetclinic.mapper.UserMapper;
 import git.xlamid.springwebpetclinic.model.User;
 import git.xlamid.springwebpetclinic.service.UserService;
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<GetUserDto> createUser(@Valid @RequestBody PostUserDto userDto) {
+    public ResponseEntity<GetUserDto> createUser(@Valid @RequestBody CreateUserDto userDto) {
         log.info("Create user: {}", userDto);
         User user = userService
                 .createUser(userMapper.postUserDtoToUser(userDto));
@@ -42,7 +42,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<GetUserDto> updateUserById(@PathVariable Long id,
-                                                     @Valid @RequestBody PutUserDto userDto) {
+                                                     @Valid @RequestBody UpdateUserDto userDto) {
         log.info("Update user: {} with id={}", userDto, id);
         User user = userService
                 .updateUserById(id, userMapper.putUserDtoToUser(userDto));

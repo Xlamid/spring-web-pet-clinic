@@ -1,8 +1,8 @@
 package git.xlamid.springwebpetclinic.controller;
 
 import git.xlamid.springwebpetclinic.dto.pet.GetPetDto;
-import git.xlamid.springwebpetclinic.dto.pet.PostPetDto;
-import git.xlamid.springwebpetclinic.dto.pet.PutPetDto;
+import git.xlamid.springwebpetclinic.dto.pet.CreatePetDto;
+import git.xlamid.springwebpetclinic.dto.pet.UpdatePetDto;
 import git.xlamid.springwebpetclinic.mapper.PetMapper;
 import git.xlamid.springwebpetclinic.model.Pet;
 import git.xlamid.springwebpetclinic.service.PetService;
@@ -30,7 +30,7 @@ public class PetController {
     }
 
     @PostMapping
-    public ResponseEntity<GetPetDto> createPet(@Valid @RequestBody PostPetDto petDto) {
+    public ResponseEntity<GetPetDto> createPet(@Valid @RequestBody CreatePetDto petDto) {
         log.info("Create pet: {}", petDto);
         Pet pet = petService.createPet(petMapper.postPetDtoToPet(petDto));
         return ResponseEntity
@@ -40,7 +40,7 @@ public class PetController {
 
     @PutMapping("/{id}")
     public ResponseEntity<GetPetDto> updatePetById(@PathVariable Long id,
-                                                   @Valid @RequestBody PutPetDto petDto) {
+                                                   @Valid @RequestBody UpdatePetDto petDto) {
         log.info("Update pet: {} with id={}", petDto, id);
         Pet pet = petService.updatePetById(id, petMapper.putPetDtoToPet(petDto));
         return ResponseEntity

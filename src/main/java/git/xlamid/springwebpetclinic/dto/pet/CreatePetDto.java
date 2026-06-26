@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class PostPetDto {
+public class CreatePetDto {
 
     @NotBlank
     @Size(min = 2, max = 100)
@@ -12,10 +12,10 @@ public class PostPetDto {
     @NotNull
     private Long userId;
 
-    public PostPetDto() {
+    public CreatePetDto() {
     }
 
-    public PostPetDto(String name, Long userId) {
+    public CreatePetDto(String name, Long userId) {
         this.name = name;
         this.userId = userId;
     }

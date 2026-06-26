@@ -1,8 +1,8 @@
 package git.xlamid.springwebpetclinic.controller;
 
 import git.xlamid.springwebpetclinic.dto.pet.GetPetDto;
-import git.xlamid.springwebpetclinic.dto.pet.PostPetDto;
-import git.xlamid.springwebpetclinic.dto.pet.PutPetDto;
+import git.xlamid.springwebpetclinic.dto.pet.CreatePetDto;
+import git.xlamid.springwebpetclinic.dto.pet.UpdatePetDto;
 import git.xlamid.springwebpetclinic.helper.CreatePetHelper;
 import git.xlamid.springwebpetclinic.model.Pet;
 import org.assertj.core.api.Assertions;
@@ -38,8 +38,8 @@ public class PetControllerTest {
 
     @Test
     void shouldSuccessCreatePet() throws Exception {
-        PostPetDto postPetDto = createPetHelper.createCorrectPostPetDto();
-        String json = objectMapper.writeValueAsString(postPetDto);
+        CreatePetDto createPetDto = createPetHelper.createCorrectPostPetDto();
+        String json = objectMapper.writeValueAsString(createPetDto);
 
         String resJson = mockMvc.perform(post("/api/pets")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -49,15 +49,15 @@ public class PetControllerTest {
                 .getContentAsString();
         GetPetDto resDto = objectMapper.readValue(resJson, GetPetDto.class);
 
-        assertEquals(postPetDto.getName(), resDto.getName());
-        assertEquals(postPetDto.getUserId(), resDto.getUserId());
+        assertEquals(createPetDto.getName(), resDto.getName());
+        assertEquals(createPetDto.getUserId(), resDto.getUserId());
         assertNotNull(resDto.getId());
     }
 
     @Test
     void shouldNotCreatePetWhenPetIncorrect() throws Exception {
-        PostPetDto postPetDto = createPetHelper.createIncorrectPostPetDto();
-        String json = objectMapper.writeValueAsString(postPetDto);
+        CreatePetDto createPetDto = createPetHelper.createIncorrectPostPetDto();
+        String json = objectMapper.writeValueAsString(createPetDto);
 
         mockMvc.perform(post("/api/pets")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -70,8 +70,8 @@ public class PetControllerTest {
         Pet pet = createPetHelper.createCorrectPet();
         pet = new Pet(pet.getId(), pet.getName(), pet.getUserId());
 
-        PutPetDto putPetDto = createPetHelper.createCorrectPutPetDto();
-        String json = objectMapper.writeValueAsString(putPetDto);
+        UpdatePetDto updatePetDto = createPetHelper.createCorrectPutPetDto();
+        String json = objectMapper.writeValueAsString(updatePetDto);
 
         String resJson = mockMvc.perform(put("/api/pets/{id}", pet.getId())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -89,8 +89,8 @@ public class PetControllerTest {
     @Test
     void shouldNotUpdatePetWhenPetIncorrect() throws Exception {
         Pet pet = createPetHelper.createCorrectPet();
-        PutPetDto putPetDto = createPetHelper.createIncorrectPutPetDto();
-        String json = objectMapper.writeValueAsString(putPetDto);
+        UpdatePetDto updatePetDto = createPetHelper.createIncorrectPutPetDto();
+        String json = objectMapper.writeValueAsString(updatePetDto);
 
         mockMvc.perform(put("/api/pets/{id}", pet.getId())
                         .contentType(MediaType.APPLICATION_JSON)

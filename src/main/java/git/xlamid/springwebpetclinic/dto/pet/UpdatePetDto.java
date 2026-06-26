@@ -3,16 +3,16 @@ package git.xlamid.springwebpetclinic.dto.pet;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class PutPetDto {
+public class UpdatePetDto {
 
     @NotBlank
     @Size(min = 2, max = 100)
     private String name;
 
-    public PutPetDto() {
+    public UpdatePetDto() {
     }
 
-    public PutPetDto(String name) {
+    public UpdatePetDto(String name) {
         this.name = name;
     }
 

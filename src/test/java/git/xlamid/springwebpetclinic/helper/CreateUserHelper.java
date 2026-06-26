@@ -1,38 +1,38 @@
 package git.xlamid.springwebpetclinic.helper;
 
-import git.xlamid.springwebpetclinic.dto.user.PostUserDto;
-import git.xlamid.springwebpetclinic.dto.user.PutUserDto;
+import git.xlamid.springwebpetclinic.dto.user.CreateUserDto;
+import git.xlamid.springwebpetclinic.dto.user.UpdateUserDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CreateUserHelper {
 
-    public PostUserDto createCorrectPostUserDto() {
-        return new PostUserDto(
+    public CreateUserDto createCorrectPostUserDto() {
+        return new CreateUserDto(
                 "name1",
                 "name1@mail.com",
                 20
         );
     }
 
-    public PostUserDto createIncorrectPostUserDto() {
-        return new PostUserDto(
+    public CreateUserDto createIncorrectPostUserDto() {
+        return new CreateUserDto(
                 "n",
                 "name1mail.com",
                 20
         );
     }
 
-    public PutUserDto createCorrectPutUserDto() {
-        return new PutUserDto(
+    public UpdateUserDto createCorrectPutUserDto() {
+        return new UpdateUserDto(
                 "name2",
                 "name2@mail.com",
                 30
         );
     }
 
-    public PutUserDto createIncorrectPutUserDto() {
-        return new PutUserDto(
+    public UpdateUserDto createIncorrectPutUserDto() {
+        return new UpdateUserDto(
                 "n",
                 "name1mail.com",
                 20
